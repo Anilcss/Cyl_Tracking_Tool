@@ -6,7 +6,7 @@ import java.sql.SQLException;
 
 public class Dbconnection {
 
-	public static void main(String[] args) {
+	public Connection Connection() {
 
 		String url = "jdbc:mysql://localhost:3306/Cyltool"; 
 		String username = "root"; 
@@ -36,6 +36,7 @@ public class Dbconnection {
 				}
 			}
 		}
+		return connect;
 	}
 	
 		
