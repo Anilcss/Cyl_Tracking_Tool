@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import Dbconnection.Dbconnection;
+import Model.Dao;
 
 /**
  * Servlet implementation class Incoming
@@ -41,10 +42,12 @@ public class Incoming extends HttpServlet {
 		for(int i=1;i<=10;i++)
 		{
 			System.out.println("cylno"+i);
-			if(request.getParameter("cylno"+i)!="")
+			if(request.getParameter("cylno"+i)!="" && request.getParameter("cylno"+i)!=null)
 			cyllist.add(request.getParameter("cylno"+i));
 		}
-		System.out.println(cyllist);
+		//System.out.println(cyllist);
+		Dao dao1=new Dao();
+		Dao.insert_cly_data(cyllist);
 		response.getWriter().print("Data received");
 		
 		//response.getWriter().append("Served at: ").append(request.getContextPath());
@@ -57,10 +60,8 @@ public class Incoming extends HttpServlet {
 		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
-	public static void inco(Dbconnection dbconnection)
-	{
-		
-		
-	}
+	
+	
+	
 
 }
