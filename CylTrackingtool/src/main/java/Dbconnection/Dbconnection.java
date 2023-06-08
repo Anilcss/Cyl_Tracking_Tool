@@ -4,13 +4,16 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
+import javax.management.loading.PrivateClassLoader;
+
 public class Dbconnection {
 	private static final String URL = "jdbc:mysql://localhost:3306/Cyltool";
 	private static final String USERNAME = "root";
 	private static final String PASSWORD = "root";
 	private static int connectioncount=0;
+	private static Connection connection = null;
 	public Connection getConnection() {
-		Connection connection = null;
+	
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			connection = DriverManager.getConnection(URL, USERNAME, PASSWORD);
@@ -24,5 +27,19 @@ public class Dbconnection {
 			e.printStackTrace();
 		}
 		return connection;
+	}
+	public void closeconnection()
+	{
+		if(connection!=null)
+		{
+			try {
+				connection.close();
+				connectioncount--;
+				System.out.println("Total connection is=====>"+connectioncount);
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 	}
 }

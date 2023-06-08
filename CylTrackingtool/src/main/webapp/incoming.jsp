@@ -1,3 +1,4 @@
+<%@page import="Dbconnection.Dbconnection"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -70,8 +71,6 @@
 								<option value="1">O2</option>
 								<option value="2">N2</option>
 								<option value="3">Ar</option>
-
-
 						</select></td>
 						
 					</tr>
@@ -97,6 +96,11 @@
 		</form>
 
 	</div>
-
+	<%Dbconnection dbconnection=new Dbconnection();
+	String str=request.getParameter("cylno1");
+	if(str!=null){
+	dbconnection.closeconnection();
+	}
+	%>
 </body>
 </html>
