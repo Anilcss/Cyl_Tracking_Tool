@@ -1,10 +1,11 @@
 <%@page import="Dbconnection.Dbconnection"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Incoming</title>
+<title>Cylinder Master</title>
 <h2></h2>
 <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
@@ -14,44 +15,32 @@
 
 </head>
 <body>
-	<jsp:include page="Menu.jsp" />
-
+<jsp:include page="Menu.jsp" />
 	<div class="header">
 		<h1>Cylinder Tracking Tool</h1>
 
-		<p>Company Name</p>
+		<p>Cylinder Master Entry</p>
 	</div>
 	<hr>
-	<div class="customer">
-
-		<div class="Cust_name" style="margin-left: 20px;">
-			<h1>Customer Name:</h1>
-		</div>
-		<div>
-			<input type="text" class="cust_list">
-
-		</div>
-		<%
-		boolean flag = false;
-		%>
-
-		<div>
-			<input <%if (flag) {%> disabled <%}%> type="date"
-				style="border-color: blue; margin-left: 20px; margin-top: 15px; border-bottom-left-radius: 10px; border-top-right-radius: 10px;">
-		</div>
-		<h1>Pass out no:</h1>
-	</div>
+	
 	<div>
-		<form action="Incoming">
+		<form action="Cylindermasters12">
 			<table class="table">
 				<thead class="thead-dark">
 					<tr class="col1">
 						<th scope="col">Sl.no</th>
 						<th scope="col">Cylinder no</th>
+
 						<th scope="col">Cyl Type</th>
-						<th scope="col"></th>
+						<th scope="col">Cyl Make</th>
+						<th scope="col">Cyl date of manufacture</th>
+						<th scope="col">Date of last testing</th>
 					</tr>
 				</thead>
+
+
+
+
 				<thead class="thead-light">
 				<tbody>
 					<%
@@ -61,13 +50,16 @@
 					%>
 					<tr class="col1">
 						<th scope="row"><%=i%>.</th>
-						<td><input type="text" name="cylno<%=i%>"></td>
-						<td><select>
+						<td><input type="text" name="cylnomaster<%=i%>"></td>
+						<td><select name="cyltype<%=i%>" >
+							<option value="" selected="selected">Select Cyl</option>
 								<option value="1">O2</option>
 								<option value="2">N2</option>
 								<option value="3">Ar</option>
 						</select></td>
-
+						<td><input type="text" name="cylmake<%=i%>" ></td>
+						<td><input type="date" name="cyldom<%=i%>"></td>
+						<td><input type="date" name="cyldot<%=i%>"></td>
 					</tr>
 
 					<%
@@ -79,10 +71,8 @@
 						</td>
 						<td></td>
 						<td>
-							<button class="btn btn-primary active" type="submit">Push
-								All</button>
-							<button class="btn active delete1 " type="reset">Clear
-								all</button>
+							<button class="btn btn-primary active" type="submit">Submit</button>
+							<button class="btn active delete1 " type="reset">Cancel</button>
 						</td>
 					</tr>
 				</tbody>
@@ -92,11 +82,10 @@
 		</form>
 
 	</div>
-	<%
-	Dbconnection dbconnection = new Dbconnection();
-	String str = request.getParameter("cylno1");
-	if (str != null) {
-		dbconnection.closeconnection();
+	<%Dbconnection dbconnection=new Dbconnection();
+	String str=request.getParameter("cylno1");
+	if(str!=null){
+	dbconnection.closeconnection();
 	}
 	%>
 </body>

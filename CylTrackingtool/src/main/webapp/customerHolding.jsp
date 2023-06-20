@@ -16,19 +16,66 @@
 <body>
 	<jsp:include page="Menu.jsp" />
 
+<form action="" method="post">
+
+<input placeholder="Customer no" type="text" name="cust_name">
+<input placeholder="passin" type="number" name="passin">
+<select name="cyltype" >
+							<option value="" selected="selected">Select Cyl</option>
+								<option value="1">O2</option>
+								<option value="2">N2</option>
+								<option value="3">Ar</option>
+						</select>
+<button class="btn btn-primary active" type="submit">Submit</button>
+</form>
+
 	<%
 	Dbconnection dbconnection = null;
 	Connection connection = null;
 	PreparedStatement preparedStatement = null;
-
+	ResultSet resultSet = null;
 	try {
 		dbconnection = new Dbconnection();
 		connection = dbconnection.getConnection();
+		
+		String custname = request.getParameter("cust_name");
+		String passin = request.getParameter("passin");
+		String cyltype=request.getParameter("cyltype");
+		StringBuilder sql = new StringBuilder("SELECT * FROM YARD WHERE 1=1");
+		
+		if (custname != null && !custname.isEmpty()) {
+			sql.append(" AND CustomerID = ?");
+		}
+		
+		if (passin != null && !passin.isEmpty()) {
+			sql.append(" AND passin = ?");
+		}
+		if (cyltype != null && !cyltype.isEmpty()) {
+			sql.append(" AND CylType = ?");
+		}
+		preparedStatement = connection.prepareStatement(sql.toString());
+		
+		int parameterIndex = 0;
+		if (custname != null && !custname.isEmpty()) {
+			parameterIndex=parameterIndex+1;
+		    preparedStatement.setString(parameterIndex, custname);
+		}
 
-		preparedStatement = connection.prepareStatement("SELECT * FROM YARD");
-		ResultSet resultSet = preparedStatement.executeQuery();
+		if (passin != null && !passin.isEmpty()) {
+			parameterIndex=parameterIndex+1;
+		    preparedStatement.setString(parameterIndex, passin);
+		}
+
+		if (cyltype != null && !cyltype.isEmpty()) {
+			parameterIndex++;
+		    preparedStatement.setString(parameterIndex, cyltype);
+		}
+
+		
+		resultSet = preparedStatement.executeQuery();
 	%>
 	<table class="table" border="2">
+	
 		<thead>
 			<tr>
 				<th scope="col">Sl no</th>
@@ -49,8 +96,9 @@
 			<tr>
 
 				<td scope="row"><%=i%></td>
-				<td><%=resultSet.getString(2)%></td>
 				<td><%=resultSet.getString(5)%></td>
+				<td><%=resultSet.getString(2)%></td>
+				
 				<td><%=resultSet.getString(1)%></td>
 				<td><%=resultSet.getString(3)%></td>
 				<td><%=resultSet.getString(4)%></td>

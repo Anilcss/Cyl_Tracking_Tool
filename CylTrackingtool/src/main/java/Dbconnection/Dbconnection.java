@@ -26,6 +26,10 @@ public class Dbconnection {
 			System.out.println("Failed to connect to the database");
 			e.printStackTrace();
 		}
+		catch (Exception e) {
+			// TODO: handle exception
+			System.out.println(e);
+		}
 		return connection;
 	}
 	public void closeconnection()
