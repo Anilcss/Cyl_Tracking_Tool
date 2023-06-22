@@ -53,10 +53,13 @@ public class Customermaster extends HttpServlet {
 			dbconnection.closeconnection();
 		} catch (Exception e) {
 			e.printStackTrace();
-			dbconnection.closeconnection();
+			
 		}
 		finally {
-			dbconnection.closeconnection();
+			if(dbconnection!=null)
+			{
+				dbconnection.closeconnection();
+			}
 		}
 	}
 

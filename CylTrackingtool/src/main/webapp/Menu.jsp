@@ -45,6 +45,9 @@
     <li><a href="yardreport.jsp">Yard Reports</a></li>
     <li><a href="customerHolding.jsp">Customer Holdings</a></li>
     <li><a href="customercreation.jsp">Customer Registration</a></li>
+        <li><a href="Cylindermaster.jsp">Cylinder Master</a></li>
+    
+    
   </ul>
 
 </div>
