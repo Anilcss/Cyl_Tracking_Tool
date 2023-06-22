@@ -1,3 +1,6 @@
+<%@page import="java.sql.ResultSet"%>
+<%@page import="java.sql.Statement"%>
+<%@page import="java.sql.Connection"%>
 <%@page import="Dbconnection.Dbconnection"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
@@ -28,7 +31,55 @@
 			<h1>Customer Name:</h1>
 		</div>
 		<div>
-			<input type="text" class="cust_list">
+<%
+Dbconnection dbconnection =new Dbconnection();
+try {
+    
+    Connection conn=dbconnection.getConnection();
+    
+    String query = "SELECT * FROM newcusttable";
+    Statement stmt = conn.createStatement();
+    ResultSet rs = stmt.executeQuery(query);
+    
+    %>
+    <select>
+    <%
+    while (rs.next() && rs.getString("custcompname")!=null) {
+        String value = rs.getString("custcompname");
+        %><option value='" + value + "' name= > <%=value %> </option>
+        <%
+    }
+    %>
+    </select>
+    <%
+    rs.close();
+    stmt.close();
+    conn.close();
+} catch (Exception e) {
+    e.printStackTrace();
+}
+finally{
+	try{
+		dbconnection.closeconnection();
+	}catch(Exception e)
+	{
+		System.out.println(e);
+	}
+}
+%>
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 		</div>
 		<%
@@ -62,7 +113,7 @@
 					<tr class="col1">
 						<th scope="row"><%=i%>.</th>
 						<td><input type="text" name="cylno<%=i%>"></td>
-						<td><select>
+						<td><select disabled="disabled"  value="2" >
 								<option value="1">O2</option>
 								<option value="2">N2</option>
 								<option value="3">Ar</option>
@@ -93,7 +144,7 @@
 
 	</div>
 	<%
-	Dbconnection dbconnection = new Dbconnection();
+	
 	String str = request.getParameter("cylno1");
 	if (str != null) {
 		dbconnection.closeconnection();

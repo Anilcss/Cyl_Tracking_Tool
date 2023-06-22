@@ -18,8 +18,42 @@
 
 <form action="" method="post">
 
-<input placeholder="Customer no" type="text" name="cust_name">
-<input placeholder="passin" type="number" name="passin">
+<%
+Dbconnection dbconnection = new Dbconnection();
+PreparedStatement preparedStatement = null;
+try {
+    
+    Connection conn=dbconnection.getConnection();
+    
+    String query = "SELECT * FROM newcusttable";
+    Statement stmt = conn.createStatement();
+    ResultSet rs = stmt.executeQuery(query);
+    
+    %>
+    <select>
+    <%
+    while (rs.next() && rs.getString("custcompname")!=null) {
+        String value = rs.getString("custcompname");
+        String id=rs.getString("custid");
+        %><option value="<%=id %>" name= ""> <%=value %> </option>
+        <%
+    }
+    %>
+    </select>
+    <%
+    rs.close();
+    stmt.close();
+    conn.close();
+} catch (Exception e) {
+    e.printStackTrace();
+}
+
+
+
+
+%>
+
+<input placeholder="ECR-NO" type="number" name="ecrno">
 <select name="cyltype" >
 							<option value="" selected="selected">Select Cyl</option>
 								<option value="1">O2</option>
@@ -30,16 +64,16 @@
 </form>
 
 	<%
-	Dbconnection dbconnection = null;
+	
 	Connection connection = null;
-	PreparedStatement preparedStatement = null;
+	PreparedStatement preparedStatement2 = null;
 	ResultSet resultSet = null;
 	try {
-		dbconnection = new Dbconnection();
+		
 		connection = dbconnection.getConnection();
 		
 		String custname = request.getParameter("cust_name");
-		String passin = request.getParameter("passin");
+		String ecrno = request.getParameter("ecrno");
 		String cyltype=request.getParameter("cyltype");
 		StringBuilder sql = new StringBuilder("SELECT * FROM YARD WHERE 1=1");
 		
@@ -47,39 +81,39 @@
 			sql.append(" AND CustomerID = ?");
 		}
 		
-		if (passin != null && !passin.isEmpty()) {
+		if (ecrno != null && !ecrno.isEmpty()) {
 			sql.append(" AND passin = ?");
 		}
 		if (cyltype != null && !cyltype.isEmpty()) {
 			sql.append(" AND CylType = ?");
 		}
-		preparedStatement = connection.prepareStatement(sql.toString());
+		preparedStatement2 = connection.prepareStatement(sql.toString());
 		
 		int parameterIndex = 0;
 		if (custname != null && !custname.isEmpty()) {
 			parameterIndex=parameterIndex+1;
-		    preparedStatement.setString(parameterIndex, custname);
+		    preparedStatement2.setString(parameterIndex, custname);
 		}
 
-		if (passin != null && !passin.isEmpty()) {
+		if (ecrno != null && !ecrno.isEmpty()) {
 			parameterIndex=parameterIndex+1;
-		    preparedStatement.setString(parameterIndex, passin);
+		    preparedStatement2.setString(parameterIndex, ecrno);
 		}
 
 		if (cyltype != null && !cyltype.isEmpty()) {
 			parameterIndex++;
-		    preparedStatement.setString(parameterIndex, cyltype);
+			preparedStatement2.setString(parameterIndex, cyltype);
 		}
 
 		
-		resultSet = preparedStatement.executeQuery();
+		resultSet = preparedStatement2.executeQuery();
 	%>
 	<table class="table" border="2">
 	
 		<thead>
 			<tr>
-				<th scope="col">Sl no</th>
-				<th scope="col">Passin</th>
+				<th scope="col">SL-NO</th>
+				<th scope="col">ECR-NO</th>
 				<th scope="col">Customer Name</th>
 				<th scope="col">Cylinder No</th>
 				<th scope="col">Type of Cylinder</th>
@@ -116,8 +150,7 @@
 	}
 	dbconnection.closeconnection();
 	%>
-	<button class="btn btn-primary active" style="margin-left: 30%"
-		onclick="redirect()">Back to Incoming</button>
+	
 
 </body>
 <script type="text/javascript">

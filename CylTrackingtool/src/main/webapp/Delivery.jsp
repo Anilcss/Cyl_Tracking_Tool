@@ -64,8 +64,8 @@
 						<th scope="row"><%=i%>.</th>
 						<td><input type="text" name="cylno<%=i%>"></td>
 						<td><select>
-								<option value="1">O2</option>
-								<option value="2">N2</option>
+								<option value="1" <%=(false)?"":""%>>O2</option>
+								<option value="2" <%=(true)?"selected":""%>>N2</option>
 								<option value="3">Ar</option>
 						</select></td>
 

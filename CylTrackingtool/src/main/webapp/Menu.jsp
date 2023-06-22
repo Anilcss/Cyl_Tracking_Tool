@@ -44,6 +44,7 @@
     <li><a href="Delivery.jsp">Outgoing</a></li>
     <li><a href="yardreport.jsp">Yard Reports</a></li>
     <li><a href="customerHolding.jsp">Customer Holdings</a></li>
+    <li><a href="customercreation.jsp">Customer Registration</a></li>
   </ul>
 
 </div>
