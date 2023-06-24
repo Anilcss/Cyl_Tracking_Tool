@@ -48,7 +48,7 @@ public class Incoming extends HttpServlet {
 		//System.out.println(cyllist);
 		Dao dao1=new Dao();
 		Dao.insert_cly_data(cyllist);
-		response.getWriter().print("Data received");
+		response.sendRedirect("Menu.jsp");
 		
 		//response.getWriter().append("Served at: ").append(request.getContextPath());
 	}

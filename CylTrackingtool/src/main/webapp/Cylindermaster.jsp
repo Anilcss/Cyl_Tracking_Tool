@@ -1,3 +1,6 @@
+<%@page import="java.sql.ResultSet"%>
+<%@page import="java.sql.PreparedStatement"%>
+<%@page import="java.sql.Connection"%>
 <%@page import="Dbconnection.Dbconnection"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
@@ -15,14 +18,14 @@
 
 </head>
 <body>
-<jsp:include page="Menu.jsp" />
+	<jsp:include page="Menu.jsp" />
 	<div class="header">
 		<h1>Cylinder Tracking Tool</h1>
 
 		<p>Cylinder Master Entry</p>
 	</div>
 	<hr>
-	
+
 	<div>
 		<form action="Cylindermasters12">
 			<table class="table">
@@ -45,21 +48,53 @@
 				<tbody>
 					<%
 					int cyl_sum = 0;
-					for (int i = 1; i <= 5; i++) {
+					for (int i = 1; i <= 10; i++) {
 						cyl_sum = cyl_sum + 1;
 					%>
 					<tr class="col1">
 						<th scope="row"><%=i%>.</th>
-						<td><input type="text" name="cylnomaster<%=i%>"></td>
-						<td><select name="cyltype<%=i%>" >
-							<option value="" selected="selected">Select Cyl</option>
-								<option value="1">O2</option>
-								<option value="2">N2</option>
-								<option value="3">Ar</option>
+						<td><input type="text" name="cylnomaster<%=i%>"
+							style="border: 1px solid #ccc; padding: 5px;"></td>
+						<td><select name="cyltype<%=i%>"
+							style="border: 1px solid #ccc; padding: 5px;">
+								<option value="" selected="selected">Select Cyl</option>
+								 <%
+								 Dbconnection dbconnection=new Dbconnection();
+           		     try{
+           		    	
+               		    Connection conn = dbconnection.getConnection();
+    					String drop = "SELECT * FROM cyltype";
+    					PreparedStatement preparedStatement = conn.prepareStatement(drop);
+    			ResultSet rs = preparedStatement.executeQuery();
+    			
+    			while(rs.next())
+    			{
+    				%>
+    				<option value="<%=rs.getString(1)%>" name="cyltype+<%=i%>"> <%=rs.getString(2) %></option>
+    				<%					
+    			}
+           		    	 
+           		    	 
+           		    	 
+           		     }
+					catch(Exception e) {
+						e.printStackTrace();
+						
+					}
+					finally{
+						if(dbconnection!=null)
+						{
+							dbconnection.closeconnection();
+						}
+					}
+			%>
 						</select></td>
-						<td><input type="text" name="cylmake<%=i%>" ></td>
-						<td><input type="date" name="cyldom<%=i%>"></td>
-						<td><input type="date" name="cyldot<%=i%>"></td>
+						<td><input type="text" name="cylmake<%=i%>"
+							style="border: 1px solid #ccc; padding: 5px;"></td>
+						<td><input type="date" name="cyldom<%=i%>"
+							style="border: 1px solid #ccc; padding: 5px;"></td>
+						<td><input type="date" name="cyldot<%=i%>"
+							style="border: 1px solid #ccc; padding: 5px;"></td>
 					</tr>
 
 					<%
@@ -82,11 +117,6 @@
 		</form>
 
 	</div>
-	<%Dbconnection dbconnection=new Dbconnection();
-	String str=request.getParameter("cylno1");
-	if(str!=null){
-	dbconnection.closeconnection();
-	}
-	%>
+	
 </body>
 </html>

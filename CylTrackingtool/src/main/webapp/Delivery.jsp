@@ -1,3 +1,6 @@
+<%@page import="java.sql.ResultSet"%>
+<%@page import="java.sql.Statement"%>
+<%@page import="java.sql.Connection"%>
 <%@page import="Dbconnection.Dbconnection"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
@@ -26,22 +29,53 @@
 	<div class="customer">
 
 		<div class="Cust_name" style="margin-left: 20px;">
-			<h1>Customer Name:</h1>
-		</div>
-		<div>
-			<input type="text" class="cust_list">
+		
+		
+			<%
+			Dbconnection dbconnection=new Dbconnection();
+			try {
+		        Connection conn = dbconnection.getConnection();
+		        String query = "SELECT * FROM newcusttable";
+		        Statement stmt = conn.createStatement();
+		        ResultSet rs = stmt.executeQuery(query);
+		      %>
+		      <select class="form-control" >
+		      <option>Select Customer</option>
+		        <%
+		        while (rs.next() && rs.getString("custcompname") != null) {
+		          String value = rs.getString("custcompname");
+		        %>
+		        <option value=""><%= value %></option>
+		        <% } %>
+		      </select>
+		      <%
+		        rs.close();
+		        stmt.close();
+		        conn.close();
+		      } catch (Exception e) {
+		        e.printStackTrace();
+		      } finally {
+		        try {
+		          dbconnection.closeconnection();
+		        } catch (Exception e) {
+		          System.out.println(e);
+		        }
+		      }
+		      %>
 
 		</div>
 		<%
 		boolean flag = false;
 		%>
-
-		<div>
+<div>
 			<input <%if (flag) {%> disabled <%}%> type="date"
-				style="border-color: blue; margin-left: 20px; margin-top: 15px; border-bottom-left-radius: 10px; border-top-right-radius: 10px;">
+				style="border-color: blue; margin-left: 20px; border-bottom-left-radius: 10px; border-top-right-radius: 10px;">
+	
 		</div>
-		<h1>Pass out no:</h1>
+			<h4>Pass out no:</h4>
 	</div>
+	
+		
 	<div>
 		<form action="Incoming">
 			<table class="table">
@@ -93,12 +127,6 @@
 		</form>
 
 	</div>
-	<%
-	Dbconnection dbconnection = new Dbconnection();
-	String str = request.getParameter("cylno1");
-	if (str != null) {
-		dbconnection.closeconnection();
-	}
-	%>
+	
 </body>
 </html>

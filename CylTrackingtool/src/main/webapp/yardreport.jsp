@@ -19,13 +19,14 @@
 	<%
 	Dbconnection dbconnection = null;
 	Connection connection = null;
-	PreparedStatement preparedStatement = null;
+	PreparedStatement preparedStatement, preparedStatement2 = null;
 
 	try {
 		dbconnection = new Dbconnection();
 		connection = dbconnection.getConnection();
 
 		preparedStatement = connection.prepareStatement("SELECT * FROM YARD");
+
 		ResultSet resultSet = preparedStatement.executeQuery();
 	%>
 	<table class="table" border="2">
@@ -50,9 +51,54 @@
 
 				<td scope="row"><%=i%></td>
 				<td><%=resultSet.getString(2)%></td>
-				<td><%=resultSet.getString(5)%></td>
+				<%
+				try {
+
+					String cust_name = null;
+					preparedStatement2 = connection
+					.prepareStatement("select custcompname from newcusttable where custid=" + resultSet.getString(5));
+
+					ResultSet resultSet2 = preparedStatement2.executeQuery();
+					if (resultSet2.next()) {
+						cust_name = resultSet2.getString(1);
+					}
+				%>
+				<td><%=cust_name%></td>
+				<%
+				} catch (Exception e) {
+				e.printStackTrace();
+				} finally {}
+				%>
+				
+				
+				
+				
+				
+				
+				
 				<td><%=resultSet.getString(1)%></td>
-				<td><%=resultSet.getString(3)%></td>
+
+				<%
+				try {
+
+					String cylindername = null;
+					preparedStatement2 = connection
+					.prepareStatement("select cylinder from cyltype where cylnum=" + resultSet.getString(3));
+
+					ResultSet resultSet2 = preparedStatement2.executeQuery();
+					if (resultSet2.next()) {
+						cylindername = resultSet2.getString(1);
+					}
+				%>
+				<td><%=cylindername%></td>
+				<%
+				} catch (Exception e) {
+				e.printStackTrace();
+				} finally {
+
+				}
+				%>
+				<!-- 5 -->
 				<td><%=resultSet.getString(4)%></td>
 				<td><%=resultSet.getString(6)%></td>
 			</tr>
@@ -66,16 +112,11 @@
 	} catch (Exception e) {
 	e.printStackTrace();
 	}
+	connection.close();
 	dbconnection.closeconnection();
 	%>
-	<button class="btn btn-primary active" style="margin-left: 30%"
-		onclick="redirect()">Back to Incoming</button>
+
 
 </body>
-<script type="text/javascript">
-	function redirect() {
-		window.location.href = "http://localhost:8080/CylTrackingtool/incoming.jsp";
-	}
-</script>
 
 </html>

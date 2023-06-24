@@ -53,7 +53,7 @@ public class Dao {
 				preparedStatement = connection.prepareStatement("INSERT INTO yard (Cylinderno, CustomerID, CylType, datein,passin,Intime) VALUES (?, ?, ?, ?, ?, ?)");
 				preparedStatement.setString(1, clyno.get(i));
 				preparedStatement.setString(2, "041");
-				preparedStatement.setString(3, "5");
+				preparedStatement.setString(3, "2");
 				preparedStatement.setString(4, currentdate);
 				preparedStatement.setString(5, cylpassin);
 				preparedStatement.setString(6, currenttime);
