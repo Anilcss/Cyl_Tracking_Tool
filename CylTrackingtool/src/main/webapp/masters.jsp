@@ -39,12 +39,8 @@
   <div>
     <ul class="navbar">
       <li><a href="Menu.jsp">Home</a></li>
-      <li><a href="incoming.jsp">Incoming</a></li>
-      <li><a href="Delivery.jsp">Outgoing</a></li>
-      <li><a href="yardreport.jsp">Yard Reports</a></li>
-      <li><a href="customerHolding.jsp">Customer Holdings</a></li>
-      <li><a href="masters.jsp">Masters</a></li>
-    
+      <li><a href="customercreation.jsp">Customer Registration</a></li>
+      <li><a href="Cylindermaster.jsp">Cylinder Master</a></li>
     </ul>
   </div>
 </body>

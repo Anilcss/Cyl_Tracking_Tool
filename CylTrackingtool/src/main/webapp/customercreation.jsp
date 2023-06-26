@@ -51,7 +51,7 @@ body {
 
 </head>
 <body>
-	<jsp:include page="Menu.jsp" />
+	<jsp:include page="masters.jsp" />
 	<div class="container">
 		<form class="form-horizontal" role="form" action="customermaster11">
 			<h2>CUSTOMER REGISTRATION</h2>

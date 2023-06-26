@@ -43,7 +43,7 @@
         Statement stmt = conn.createStatement();
         ResultSet rs = stmt.executeQuery(query);
       %>
-      <select class="form-control" >
+      <select class="form-control" style="border: solid black 2px;height: 40px;" >
       <option>Select Customer</option>
         <%
         while (rs.next() && rs.getString("custcompname") != null) {
@@ -68,7 +68,7 @@
       %>
     </div>
     <div class="form-group" style="padding-left: 20px">
-      <input type="date" value="<%=formattedDate %>" id="incoming_date" class="form-control" style="border-color: blue; border-bottom-left-radius: 10px; border-top-right-radius: 10px; ">
+      <input type="date" value="<%=formattedDate %>" id="incoming_date" class="form-control" style="border:solid black 2px; height: 40px">
      
     </div >
     <div class="form-group" style="margin-left:20px; display: flex;s " >
@@ -123,7 +123,7 @@
         <tbody>
           <%
           int cyl_sum = 0;
-          for (int i = 1; i <= 10; i++) {
+          for (int i = 1; i <= 5; i++) {
             cyl_sum = cyl_sum + 1;
           %>
           <tr class="col1">
