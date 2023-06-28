@@ -11,12 +11,9 @@
 <head>
 <meta charset="UTF-8">
 <title>Incoming</title>
-<link rel="stylesheet"
-	href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
-	integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
-	crossorigin="anonymous"></link>
-<link rel="stylesheet" href="style.css">
-<script src="js/incomingjs.js"></script>
+
+	
+<link rel="stylesheet" href="css/incoout.css">
 </head>
 <body>
   <jsp:include page="Menu.jsp" />
@@ -27,12 +24,10 @@
     <p>Company Name</p>
   </div>
   <hr>
-  <div class="customer">
-    <div class="Cust_name">
-      
-    </div>
-    <div class="form-group">
-      <% 
+		<div class="customer">
+
+			<div class="form-group">
+				<% 
       
       LocalDate today = LocalDate.now();
       String formattedDate = today.format(DateTimeFormatter.ISO_LOCAL_DATE);
@@ -44,17 +39,18 @@
         Statement stmt = conn.createStatement();
         ResultSet rs = stmt.executeQuery(query);
       %>
-      <select class="form-control" style="border: solid black 2px;height: 40px;" name="customerID" >
-      <option value="" >Select Customer</option>
-        <%
+				<select class="form-control"
+					style="border: solid black 2px; height: 40px;" name="customerID">
+					<option value="">Select Customer</option>
+					<%
          while (rs.next() && rs.getString("custcompname") != null) {
             String value = rs.getString("custcompname");
             String customerid = rs.getString("custid");
           %>
-          <option value="<%=customerid%>"><%=value%></option>
-        <% } %>
-      </select>
-      <%
+					<option value="<%=customerid%>"><%=value%></option>
+					<% } %>
+				</select>
+				<%
         rs.close();
         stmt.close();
         conn.close();
@@ -68,14 +64,15 @@
         }
       }
       %>
-    </div>
-    <div class="form-group" style="padding-left: 20px">
-      <input type="date" value="<%=formattedDate %>" id="incoming_date" class="form-control" style="border:solid black 2px; height: 40px">
-     
-    </div >
-    <div class="form-group" style="margin-left:20px; display: flex;s " >
-    <h4>ECR No :</h4>
-    <%
+			</div>
+			<div class="form-group" style="padding-left: 20px">
+				<input type="date" value="<%=formattedDate %>" id="incoming_date"
+					class="form-control" style="border: solid black 2px; height: 40px">
+
+			</div>
+			<div class="form-group" style="margin-left: 20px; display: flex;">
+				<h4>ECR No :</h4>
+				<%
     try {
     	Connection conn1 = dbconnection.getConnection();
         String query1 = "SELECT passin FROM yard ORDER BY passin DESC LIMIT 1;";
@@ -83,15 +80,16 @@
         ResultSet rs1 = stmt1.executeQuery(query1);
         int ecrrs1=0;
       %>
-      
-        <%
+
+				<%
         if(rs1.next())
         {
          ecrrs1=Integer.parseInt(rs1.getString("passin"));
         }
         %>
-        <h4> &nbsp;<%=(ecrrs1)+1 %></h4>
-        <%
+				<h4>
+					&nbsp;<%=(ecrrs1)+1 %></h4>
+				<%
         } catch (Exception e) {
         e.printStackTrace();
       } finally {
@@ -104,12 +102,12 @@
       }
         
         %>
-      
-       
-    
-    </div>
-  </div>
-  <div>
+
+
+
+			</div>
+		</div>
+		<div>
  
   </div>
   <div>
@@ -174,10 +172,14 @@
           <tr class="col1">
             <td scope="row"></td>
             <td class="total-cylinders" colspan="2">Total Cylinders: <%=cyl_sum %></td>
+            </tr>
+            <tr>
+            <td></td>
             <td class="btn-container">
               <button class="btn btn-primary active" type="submit">Push All</button>
               <button class="btn active delete1" type="reset">Clear All</button>
             </td>
+            
           </tr>
         </tbody>
       </table>

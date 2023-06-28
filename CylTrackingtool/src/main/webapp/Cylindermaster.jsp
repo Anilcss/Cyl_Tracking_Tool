@@ -10,11 +10,7 @@
 <meta charset="UTF-8">
 <title>Cylinder Master</title>
 <h2></h2>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
-	integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
-	crossorigin="anonymous"></link>
-<link rel="stylesheet" href="style.css"></link>
-
+<link rel="stylesheet" href="css/cylmaster.css">
 </head>
 <body>
 	<jsp:include page="masters.jsp" />
