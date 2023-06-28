@@ -21,6 +21,7 @@
 <body>
   <jsp:include page="Menu.jsp" />
 <% Dbconnection dbconnection = new Dbconnection(); %>
+<form action="Incoming">
   <div class="header">
     <h1>Cylinder Tracking Tool</h1>
     <p>Company Name</p>
@@ -43,13 +44,14 @@
         Statement stmt = conn.createStatement();
         ResultSet rs = stmt.executeQuery(query);
       %>
-      <select class="form-control" style="border: solid black 2px;height: 40px;" >
-      <option>Select Customer</option>
+      <select class="form-control" style="border: solid black 2px;height: 40px;" name="customerID" >
+      <option value="" >Select Customer</option>
         <%
-        while (rs.next() && rs.getString("custcompname") != null) {
-          String value = rs.getString("custcompname");
-        %>
-        <option value=""><%= value %></option>
+         while (rs.next() && rs.getString("custcompname") != null) {
+            String value = rs.getString("custcompname");
+            String customerid = rs.getString("custid");
+          %>
+          <option value="<%=customerid%>"><%=value%></option>
         <% } %>
       </select>
       <%
@@ -111,7 +113,7 @@
  
   </div>
   <div>
-    <form action="Incoming">
+    
       <table class="table">
         <thead class="thead-dark">
           <tr class="col1">
@@ -131,7 +133,7 @@
             <td><input type="text" name="cylno<%= i %>" class="form-control"></td>
             <td>
               <select class="form-control" disabled="disabled" >
-                <option selected="selected">Select Cylinder</option>
+                <option selected="selected" >Select Cylinder</option>
                  <%
                 
                  try{

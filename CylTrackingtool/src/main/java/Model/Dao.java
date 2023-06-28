@@ -13,7 +13,7 @@ import Dbconnection.Dbconnection;
 
 public class Dao {
 
-	public static void insert_cly_data(ArrayList<String> clyno) {
+	public static void insert_cly_data(ArrayList<String> clyno,String Customerid) {
 		Dbconnection dbconnection = null;
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
@@ -26,6 +26,7 @@ public class Dao {
 			countconnection++;
 			DateTimeFormatter formatter1 = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 			DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("HH:mm:ss");
+			
 			String currentdate = LocalDateTime.now().format(formatter1);
 			String currenttime = LocalDateTime.now().format(formatter2);
 		
@@ -52,7 +53,7 @@ public class Dao {
 			for (int i = 0; i < clyno.size(); i++) {
 				preparedStatement = connection.prepareStatement("INSERT INTO yard (Cylinderno, CustomerID, CylType, datein,passin,Intime) VALUES (?, ?, ?, ?, ?, ?)");
 				preparedStatement.setString(1, clyno.get(i));
-				preparedStatement.setString(2, "041");
+				preparedStatement.setString(2, Customerid);
 				preparedStatement.setString(3, "2");
 				preparedStatement.setString(4, currentdate);
 				preparedStatement.setString(5, cylpassin);
@@ -89,8 +90,25 @@ public class Dao {
 		}
 	}
 
-	public static void getyardresult() {
-
+	public static void Delete_cyldata(ArrayList<String> cyllist) {
+		Dbconnection dbconnection = null;
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		
+		try {
+			dbconnection=new Dbconnection();
+			connection=dbconnection.getConnection();
+			for (String cylno : cyllist) {
+				preparedStatement=connection.prepareStatement("DELETE FROM YARD WHERE Cylinderno="+cylno);
+				preparedStatement.executeUpdate();
+			}
+			System.out.println("Delete Successfull from yard");
+			
+		} catch (Exception e) {
+			System.out.println(e);
+		}finally {
+			dbconnection.closeconnection();
+		}
 	}
 
 }

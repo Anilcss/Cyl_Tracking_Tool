@@ -1,8 +1,6 @@
 package controller;
 
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.SQLException;
 import java.util.ArrayList;
 
 import javax.servlet.ServletException;
@@ -11,20 +9,19 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import Dbconnection.Dbconnection;
 import Model.Dao;
 
 /**
- * Servlet implementation class Incoming
+ * Servlet implementation class Delivery
  */
-@WebServlet("/Incoming")
-public class Incoming extends HttpServlet {
+@WebServlet("/Outgoing")
+public class Delivery extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public Incoming() {
+    public Delivery() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -34,9 +31,7 @@ public class Incoming extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		
-		//System.out.println(request.getParameter("clyname1"));
-		
+
 		ArrayList<String> cyllist=new ArrayList<String>();
 		
 		for(int i=1;i<=10;i++)
@@ -45,14 +40,12 @@ public class Incoming extends HttpServlet {
 			if(request.getParameter("cylno"+i)!="" && request.getParameter("cylno"+i)!=null)
 			cyllist.add(request.getParameter("cylno"+i));
 		}
-		//System.out.println(cyllist);
+		System.out.println(cyllist);
 		String cust_id=request.getParameter("customerID");
-		System.out.println("===============>>>>>>>>>>>>>>>>>>.."+cust_id);
-	
-		Dao.insert_cly_data(cyllist,cust_id);
+		System.out.println("===============>>>>>>>>>>>>>>>Outgoing...>>>.."+cust_id);
+		Dao.Delete_cyldata(cyllist);
 		response.sendRedirect("Menu.jsp");
 		
-		//response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
 	/**
@@ -62,8 +55,5 @@ public class Incoming extends HttpServlet {
 		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
-	
-	
-	
 
 }

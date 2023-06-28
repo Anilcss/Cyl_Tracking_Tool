@@ -33,8 +33,9 @@
 		<thead>
 			<tr>
 				<th scope="col">Sl no</th>
-				<th scope="col">Passin</th>
+				
 				<th scope="col">Customer Name</th>
+				<th scope="col">ECR no</th>
 				<th scope="col">Cylinder No</th>
 				<th scope="col">Type of Cylinder</th>
 				<th scope="col">Date ECR</th>
@@ -50,7 +51,7 @@
 			<tr>
 
 				<td scope="row"><%=i%></td>
-				<td><%=resultSet.getString(2)%></td>
+				
 				<%
 				try {
 
@@ -64,6 +65,7 @@
 					}
 				%>
 				<td><%=cust_name%></td>
+				<td><%=resultSet.getString(5)%></td>
 				<%
 				} catch (Exception e) {
 				e.printStackTrace();
