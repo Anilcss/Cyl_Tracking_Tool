@@ -42,17 +42,17 @@ public class Cylindermasters extends HttpServlet {
 		for (int i = 1; i < 5; i++) {
 			if ((request.getParameter("cylnomaster" + i) != "") && request.getParameter("cyltype" + i) != ""
 					&& request.getParameter("cylmake" + i) != "" && request.getParameter("cyldom" + i) != ""
-					&& request.getParameter("cyldot" + i) != "") {
+					&& request.getParameter("cyldot" + i) != "" && request.getParameter("cycap" + i) != "") {
 				cylrec.add(request.getParameter("cylnomaster" + i));
 				cylrec.add(request.getParameter("cyltype" + i));
 				cylrec.add(request.getParameter("cylmake" + i));
 				cylrec.add(request.getParameter("cyldom" + i));
 				cylrec.add(request.getParameter("cyldot" + i));
-
+				cylrec.add(request.getParameter("cycap" + i));
 				System.out.println(cylrec);
 				cylmat.insert_Cyl_masters(cylrec);
 			}
-			cylrec.clear();
+				cylrec.clear();
 
 		}
 

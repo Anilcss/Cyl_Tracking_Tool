@@ -17,8 +17,9 @@
 }
 
 form table {
-  width: 70%;
+  width:100%;
   border-collapse: collapse;
+  text-align: center;
 }
 
 form table th,
@@ -38,14 +39,39 @@ form table tbody tr:nth-child(even) {
 
 button.btn {
   margin-right: 10px;
+  
+}
+.btn-primary {
+  background-color: #0080ff;
+  border-color: blue;
+  border-width: 2px;
+  border-style: solid;
+  border-radius: 5px;
+  padding: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out;
+  color:white;
 }
 
-button.delete1 {
-  background-color: #dc3545;
-  border-color: #dc3545;
+.btn-primary:hover {
+  background-color: #0084ff;
+  border-color: #0084ff;
 }
 
-button.delete1:hover {
-  background-color: #c82333;
+.delete1 {
+  background-color: red;
+  border-color: red;
+  border-width: 2px;
+  border-style: solid;
+  border-radius: 5px;
+  padding: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out;
+  color:white;
+}
+
+.delete1:hover {
+  background-color: #bd2130;
   border-color: #bd2130;
 }
+

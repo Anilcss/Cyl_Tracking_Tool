@@ -9,10 +9,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Customer Holding</title>
-<link rel="stylesheet"
-	href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
-	integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
-	crossorigin="anonymous"></link>
+<link rel="stylesheet" href="css/custholding.css">
 </head>
 <body>
 	<jsp:include page="Menu.jsp" />
@@ -151,22 +148,42 @@
 				PreparedStatement preparedStatement3 = null;
 				StringBuilder queryBuilder = new StringBuilder();
 				queryBuilder.append("SELECT custcompname FROM newcusttable WHERE custid = ");
-				queryBuilder.append(resultSet.getString(1));
+				queryBuilder.append(resultSet.getString("CustomerID"));//resultset is custumerHolding
 				String sql1 = queryBuilder.toString();
 				preparedStatement3 = connection.prepareStatement(sql1);
 				ResultSet resultSet2 = preparedStatement3.executeQuery();
 				if (resultSet2.next()) {
-					cust_name = resultSet2.getString(1);
+					cust_name = resultSet2.getString("custcompname");
 				}
 			%>
 			<tr >
 				<td scope="row"><%=i%></td>
-				<td><%=resultSet.getString(5)%></td>
+				<td><%=resultSet.getString("passout")%></td>
 				<td><%=cust_name%></td>
-				<td><%=resultSet.getString(1)%></td>
-				<td><%=resultSet.getString(3)%></td>
-				<td><%=resultSet.getString(4)%></td>
-				<td><%=resultSet.getString(6)%></td>
+				<td><%=resultSet.getString("Cylinderno")%></td>
+				<%
+				try {
+
+					String cylindername = null;
+					preparedStatement2 = connection
+					.prepareStatement("select cylinder from cyltype where cylnum=" + resultSet.getString("CylType"));
+
+					ResultSet resultSet3 = preparedStatement2.executeQuery();
+					if (resultSet3.next()) {
+						cylindername = resultSet3.getString(1);
+					}
+				%>
+				<td><%=cylindername%></td>
+				<%
+				} catch (Exception e) {
+				e.printStackTrace();
+				} finally {
+
+				}
+				%>
+				
+				<td><%=resultSet.getString("dateout")%></td>
+				<td><%=resultSet.getString("outtime")%></td>
 			</tr>
 			<%
 			}
@@ -181,8 +198,9 @@
 		if (resultSet != null) {
 			resultSet.close();
 		}
-		if (preparedStatement2 != null) {
+		if (preparedStatement2 != null || preparedStatement!=null) {
 			preparedStatement2.close();
+			preparedStatement.close();
 
 		}
 		if (connection != null) {

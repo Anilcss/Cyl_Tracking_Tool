@@ -39,8 +39,7 @@
         Statement stmt = conn.createStatement();
         ResultSet rs = stmt.executeQuery(query);
       %>
-				<select class="form-control"
-					style="border: solid black 2px; height: 40px;" name="customerID">
+				<select class="form-control" style="border: solid black 2px; height: 40px;" name="customerID" required="required">
 					<option value="">Select Customer</option>
 					<%
          while (rs.next() && rs.getString("custcompname") != null) {
@@ -128,7 +127,7 @@
           %>
           <tr class="col1">
             <th scope="row"><%= i %>.</th>
-            <td><input type="text" name="cylno<%= i %>" class="form-control"></td>
+            <td><input type="number" name="cylno<%= i %>" class="form-control"></td>
             <td>
               <select class="form-control" disabled="disabled" >
                 <option selected="selected" >Select Cylinder</option>
@@ -170,17 +169,14 @@
           }
           %>
           <tr class="col1">
-            <td scope="row"></td>
+           
             <td class="total-cylinders" colspan="2">Total Cylinders: <%=cyl_sum %></td>
-            </tr>
-            <tr>
-            <td></td>
             <td class="btn-container">
-              <button class="btn btn-primary active" type="submit">Push All</button>
-              <button class="btn active delete1" type="reset">Clear All</button>
+              <button class="btn btn-primary active" type="submit">Submit</button>
+			  <button class="btn active delete1 " type="reset">Cancel</button>
             </td>
-            
-          </tr>
+            </tr>
+       
         </tbody>
       </table>
     </form>

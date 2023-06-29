@@ -44,6 +44,7 @@ public class Delivery extends HttpServlet {
 		String cust_id=request.getParameter("customerID");
 		System.out.println("===============>>>>>>>>>>>>>>>Outgoing...>>>.."+cust_id);
 		Dao.Delete_cyldata(cyllist);
+		Dao.Insert_to_CustomerHolding(cyllist, cust_id);
 		response.sendRedirect("Menu.jsp");
 		
 	}
