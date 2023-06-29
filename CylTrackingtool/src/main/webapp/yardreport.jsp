@@ -8,10 +8,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Yard Reports</title>
-<link rel="stylesheet"
-	href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
-	integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
-	crossorigin="anonymous"></link>
+<link rel="stylesheet" href="css/yard_style.css">
 </head>
 <body>
 	<jsp:include page="Menu.jsp" />
@@ -57,7 +54,7 @@
 
 					String cust_name = null;
 					preparedStatement2 = connection
-					.prepareStatement("select custcompname from newcusttable where custid=" + resultSet.getString(5));
+					.prepareStatement("select custcompname from newcusttable where custid=" + resultSet.getString(2));
 
 					ResultSet resultSet2 = preparedStatement2.executeQuery();
 					if (resultSet2.next()) {
