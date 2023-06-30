@@ -37,6 +37,18 @@ public class Incoming extends HttpServlet {
 		
 		//System.out.println(request.getParameter("clyname1"));
 		
+		
+		//response.getWriter().append("Served at: ").append(request.getContextPath());
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		
+		
+
 		ArrayList<String> cyllist=new ArrayList<String>();
 		
 		for(int i=1;i<=10;i++)
@@ -47,20 +59,11 @@ public class Incoming extends HttpServlet {
 		}
 		//System.out.println(cyllist);
 		String cust_id=request.getParameter("customerID");
-		System.out.println("===============>>>>>>>>>>>>>>>>>>.."+cust_id);
+		System.out.println("===============>>>>>>>>>>>>>>>>>>.."+cust_id+"customer id");
 	
 		Dao.insert_cly_data(cyllist,cust_id);
 		response.sendRedirect("Menu.jsp");
 		
-		//response.getWriter().append("Served at: ").append(request.getContextPath());
-	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
 	}
 	
 	

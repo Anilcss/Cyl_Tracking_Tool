@@ -28,21 +28,19 @@
 			preparedStatement = connection.prepareStatement(query);
 			ResultSet rs = preparedStatement.executeQuery();
 		%>
-		<select >
-		<option selected="selected">Select Customer</option>
-			<%
-			while (rs.next() && rs.getString("custcompname") != null) {
-				String value = rs.getString("custcompname");
-				String id = rs.getString("custid");
-				%>
-			
-			<option value="<%=id%>" name="">
-				<%=value%>
-			</option>
-			<%
-			}
-			%>
-		</select>
+		<select name="cust_name">
+    <option value="" selected>Select Customer</option>
+    <%
+    while (rs.next() && rs.getString("custcompname") != null) {
+        String value = rs.getString("custcompname");
+        String id = rs.getString("custid");
+    %>
+    <option value="<%= id %>"><%= value %></option>
+    <%
+    }
+    %>
+</select>
+
 		<%
 		rs.close();
 
@@ -61,28 +59,23 @@
 		%>
 
 		<input placeholder="Pass Out" type="number" name="passout"> 
-		<select name="cyltype" >
-		
-			<option value="" selected="selected">Select Cyl</option>
-			
-			<%
-			String drop = "SELECT * FROM cyltype";
-			preparedStatement = connection.prepareStatement(drop);
-			ResultSet rs = preparedStatement.executeQuery();
-			
-			while(rs.next())
-			{
-				%>
-				<option value="<%=rs.getString(1)%>" name="cyltype"> <%=rs.getString(2) %></option>
-				<%					
-			}
-			%>
-			
-			
-			
-			
-			
-		</select>
+		<select name="cyl_type">
+    <option value="" selected>Select Cyl</option>
+    <%
+    String drop = "SELECT * FROM cyltype";
+    preparedStatement = connection.prepareStatement(drop);
+    ResultSet rs = preparedStatement.executeQuery();
+    
+    while (rs.next()) {
+        String cylnum = rs.getString("cylnum");
+        String cylinder = rs.getString("cylinder");
+    %>
+    <option value="<%= cylnum %>"><%= cylinder %></option>
+    <%
+    }
+    %>
+</select>
+
 		<button class="btn btn-primary active" type="submit">Submit</button>
 	</form>
 
@@ -92,7 +85,7 @@
 	try {
 		String custname = request.getParameter("cust_name");
 		String passout = request.getParameter("passout");
-		String cyltype = request.getParameter("cyltype");
+		String cyltype = request.getParameter("cyl_type");
 		StringBuilder sql = new StringBuilder("SELECT * FROM customerholding WHERE 1=1");
 
 		if (custname != null && !custname.isEmpty()) {
@@ -122,7 +115,7 @@
 			parameterIndex++;
 			preparedStatement2.setString(parameterIndex, cyltype);
 		}
-
+		
 		resultSet = preparedStatement2.executeQuery();
 	%>
 	<table class="table" border="2" style="text-align: center;">

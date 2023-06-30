@@ -49,8 +49,8 @@ public class Customermaster extends HttpServlet {
 			preparedStatement.setString(6, request.getParameter("phone_num"));
 			preparedStatement.setString(7, request.getParameter("second_phone_num"));
 			preparedStatement.setString(8, request.getParameter("GST_no"));
-			preparedStatement.executeUpdate();
-			dbconnection.closeconnection();
+			int res=preparedStatement.executeUpdate();
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 			
@@ -58,6 +58,12 @@ public class Customermaster extends HttpServlet {
 		finally {
 			if(dbconnection!=null)
 			{
+				try {
+					response.sendRedirect("customercreation.jsp");
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 				dbconnection.closeconnection();
 			}
 		}

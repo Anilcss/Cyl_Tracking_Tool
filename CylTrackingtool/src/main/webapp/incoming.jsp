@@ -18,7 +18,7 @@
 <body>
   <jsp:include page="Menu.jsp" />
 <% Dbconnection dbconnection = new Dbconnection(); %>
-<form action="Incoming">
+<form action="Incoming" method="post">
   <div class="header">
     <h1>Cylinder Tracking Tool</h1>
     <p>Company Name</p>
