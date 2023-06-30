@@ -55,7 +55,7 @@ public class Cylindermasters extends HttpServlet {
 				cylrec.clear();
 
 		}
-
+		response.sendRedirect("Cylindermaster.jsp");
 	}
 
 	/**

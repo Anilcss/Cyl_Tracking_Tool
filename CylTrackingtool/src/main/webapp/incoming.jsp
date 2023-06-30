@@ -129,8 +129,8 @@
             <th scope="row"><%= i %>.</th>
             <td><input type="number" name="cylno<%= i %>" class="form-control"></td>
             <td>
-              <select class="form-control" disabled="disabled" >
-                <option selected="selected" >Select Cylinder</option>
+              <select class="form-control" name="cyltypein<%=i%>" disabled="disabled" >
+                <option value="">Select Cylinder</option>
                  <%
                 
                  try{
@@ -143,7 +143,7 @@
  			while(rs.next())
  			{
  				%>
- 				<option value="<%=rs.getString(1)%>" name="cyltype+<%=i%>"> <%=rs.getString(2) %></option>
+ 				<option value="<%=rs.getString("cylnum")%>"> <%=rs.getString("cylinder") %></option>
  				<%					
  			}
         		    	 

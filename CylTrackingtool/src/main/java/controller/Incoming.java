@@ -58,8 +58,10 @@ public class Incoming extends HttpServlet {
 			cyllist.add(request.getParameter("cylno"+i));
 		}
 		//System.out.println(cyllist);
+		String cyltype=request.getParameter("cyltypein");
 		String cust_id=request.getParameter("customerID");
-		System.out.println("===============>>>>>>>>>>>>>>>>>>.."+cust_id+"customer id");
+	
+		System.out.println("===============>>>>>>>>>>>>>>>>>>.."+cust_id+"   customer id");
 	
 		Dao.insert_cly_data(cyllist,cust_id);
 		response.sendRedirect("Menu.jsp");
