@@ -77,6 +77,7 @@
 </select>
 
 		<button class="btn btn-primary active" type="submit">Submit</button>
+		<button class="resetclear" type="reset">Clear</button>
 	</form>
 
 	<%

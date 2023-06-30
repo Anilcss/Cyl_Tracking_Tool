@@ -13,9 +13,6 @@ h1 {
 
 /* Form */
 form {
- 
- 
- 
   margin-top: 20px;
 }
 
@@ -50,7 +47,7 @@ button {
   color: #fff;
 }
 
-.table tbody tr:nth-child(even) {
+.table tbody tr:nth-child(odd) {
   background-color: #f2f2f2;
 }
 
@@ -71,5 +68,12 @@ button {
   form {
     width: 100%;
   }
+}
+button.resetclear{
+	background-color: red;
+	
+}
+button.resetclear:hover {
+	background-color: #a31310;
 }
 
