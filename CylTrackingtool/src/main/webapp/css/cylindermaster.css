@@ -1,0 +1,14 @@
+@charset "UTF-8";
+.report-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.report-table th, .report-table td {
+    border: 1px solid black;
+    padding: 8px;
+}
+
+.report-table th {
+    background-color: #c0c0c0;
+}

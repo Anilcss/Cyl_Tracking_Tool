@@ -39,9 +39,7 @@
   <div>
     <ul class="navbar">
       <li><a href="Menu.jsp">Home</a></li>
-      <li><a href="customercreation.jsp">Customer Registration</a></li>
-      <li><a href="Cylindermaster.jsp">Cylinder Master</a></li>
-      <li><a href="masterreports.jsp">Master Reports</a></li>
+      <li><a href="cylindermasterreport.jsp">Cylinder Master Reports</a></li>
     </ul>
   </div>
 </body>

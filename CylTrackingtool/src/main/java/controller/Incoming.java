@@ -60,7 +60,7 @@ public class Incoming extends HttpServlet {
 		//System.out.println(cyllist);
 		String cyltype=request.getParameter("cyltypein");
 		String cust_id=request.getParameter("customerID");
-	
+		
 		System.out.println("===============>>>>>>>>>>>>>>>>>>.."+cust_id+"   customer id");
 	
 		Dao.insert_cly_data(cyllist,cust_id);
