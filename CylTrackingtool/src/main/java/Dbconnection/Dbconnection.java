@@ -20,7 +20,7 @@ public class Dbconnection {
 			connectioncount++;
 			System.out.println("Database connection established"+connectioncount);
 		} catch (ClassNotFoundException e) {
-			System.out.println("Failed to load MySQL JDBC driver");
+			System.out.println("Failed to load driver");
 			e.printStackTrace();
 		} catch (SQLException e) {
 			System.out.println("Failed to connect to the database");
