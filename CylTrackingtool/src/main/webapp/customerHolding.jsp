@@ -87,7 +87,7 @@
 		String custname = request.getParameter("cust_name");
 		String passout = request.getParameter("passout");
 		String cyltype = request.getParameter("cyl_type");
-		StringBuilder sql = new StringBuilder("SELECT * FROM customerholding WHERE 1=1");
+		StringBuilder sql = new StringBuilder("SELECT * FROM customerholding WHERE DELNO IS NULL");
 
 		if (custname != null && !custname.isEmpty()) {
 			sql.append(" AND CustomerID = ?");

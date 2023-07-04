@@ -22,7 +22,7 @@
 		dbconnection = new Dbconnection();
 		connection = dbconnection.getConnection();
 
-		preparedStatement = connection.prepareStatement("SELECT * FROM YARD");
+		preparedStatement = connection.prepareStatement("SELECT * FROM YARD WHERE DELNO IS NULL");
 
 		ResultSet resultSet = preparedStatement.executeQuery();
 	%>

@@ -91,7 +91,10 @@ public class Dao {
 			dbconnection=new Dbconnection();
 			connection=dbconnection.getConnection();
 			for (String cylno : cyllist) {
-				preparedStatement=connection.prepareStatement("DELETE FROM YARD WHERE Cylinderno="+cylno);
+				String sql="UPDATE YARD SET DELNO = ? WHERE Cylinderno="+cylno;
+			
+				preparedStatement=connection.prepareStatement(sql);
+				preparedStatement.setString(1, "1");
 				preparedStatement.executeUpdate();
 			}
 			System.out.println("Delete Successfull from yard");
