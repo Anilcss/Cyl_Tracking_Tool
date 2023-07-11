@@ -51,21 +51,28 @@ public class Dao {
 			
 			// Iterate through clyno ArrayList and insert each value into the database
 			for (int i = 0; i < clyno.size(); i++) {
-				preparedStatement = connection.prepareStatement("INSERT INTO yard (Cylinderno, CustomerID, CylType, datein,passin,Intime) VALUES (?, ?, ?, ?, ?, ?)");
-				preparedStatement.setString(1, clyno.get(i));
-				preparedStatement.setString(2, Customerid);
-				preparedStatement.setString(3, DataQuery.fetchcyltypefromdatabase(clyno.get(i)));
-				preparedStatement.setString(4, currentdate);
-				preparedStatement.setString(5, cylpassin);
-				preparedStatement.setString(6, currenttime);
-				// Execute the insert statement for each clyno value
-				int inserted = preparedStatement.executeUpdate();
-				if (inserted != 0) {
-					System.out.println("Inserted Successfully: " + inserted);
-				} else {
-					System.out.println("Failed to insert");
-				}
+				try {
+					preparedStatement = connection.prepareStatement("INSERT INTO yard (Cylinderno, CustomerID, CylType, datein,passin,Intime) VALUES (?, ?, ?, ?, ?, ?)");
+					preparedStatement.setString(1, clyno.get(i));
+					preparedStatement.setString(2, Customerid);
+					preparedStatement.setString(3, DataQuery.fetchcyltypefromdatabase(clyno.get(i)));
+					preparedStatement.setString(4, currentdate);
+					preparedStatement.setString(5, cylpassin);
+					preparedStatement.setString(6, currenttime);
+					// Execute the insert statement for each clyno value
+					int inserted = preparedStatement.executeUpdate();
+					if (inserted != 0) {
+						System.out.println("Inserted Successfully: " + inserted);
+					} else {
+						System.out.println("Failed to insert"+"===================negetive stock begin");
+					}
 
+				}
+				catch(Exception e)
+				{
+					System.out.println(e);
+					Neg_Dao.insert_into_neg_yard();
+				}
 			}
 			System.out.println("Total connection======>" + countconnection);
 

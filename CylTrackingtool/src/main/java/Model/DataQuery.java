@@ -3,6 +3,7 @@ package Model;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 import Dbconnection.Dbconnection;
@@ -53,6 +54,7 @@ public class DataQuery {
 				}
 			} catch (Exception e) {
 				// TODO: handle exception
+				System.out.println("=============="+LocalDateTime.now()+"================> Exception in ------(get cylinder type from database(cylinder master) by cylinder number )------DataQuery.fetchcyltypefromdatabase"+e);
 			}
 			finally {
 				dbconnection2.closeconnection();
@@ -76,7 +78,7 @@ public class DataQuery {
 				}
 			} catch (Exception e) {
 				// TODO: handle exception
-				System.out.println(e);
+				System.out.println("================="+LocalDateTime.now()+"=================Exception at (get name from cyltype like n2 o2 co2 with cyltype)"+e);
 			}
 			finally {
 				dbconnection3.closeconnection();
