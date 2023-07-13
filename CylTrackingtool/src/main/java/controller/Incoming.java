@@ -1,17 +1,15 @@
 package controller;
 
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.SQLException;
-import java.util.ArrayList;
 
+import java.util.ArrayList;
+import java.lang.*;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import Dbconnection.Dbconnection;
 import Model.Dao;
 
 /**
@@ -60,9 +58,30 @@ public class Incoming extends HttpServlet {
 		String cust_id=request.getParameter("customerID");
 		
 		System.out.println("===============>>>>>>>>>>>>>>>>>>.."+cust_id+"   customer id");
-	
+		boolean check=false;
+		check=Dao.delete_from_customerholding(cyllist,cust_id);
+		System.out.println("=========================================="+check);
+		if(check) {
 		Dao.insert_cly_data(cyllist,cust_id);
 		response.sendRedirect("Menu.jsp");
+		}
+		else {
+				
+				
+					System.out.println("Error in inserting into yard cylinder numer"+cyllist);
+			try {
+				Thread.sleep(5000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+						
+			response.sendRedirect("Menu.jsp");
+				
+			
+		}
+		
+		
 		
 	}
 	

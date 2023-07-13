@@ -43,8 +43,13 @@ public class Delivery extends HttpServlet {
 		System.out.println(cyllist);
 		String cust_id=request.getParameter("customerID");
 		System.out.println("===============>>>>>>>>>>>>>>>Outgoing...>>>.."+cust_id);
-		Dao.Delete_cyldata(cyllist);
-		Dao.Insert_to_CustomerHolding(cyllist, cust_id);
+		if(Dao.Delete_cyldata(cyllist))
+		{
+			Dao.Insert_to_CustomerHolding(cyllist, cust_id);
+		}
+		else {
+			response.getWriter().print("Error in input data Cylinder or Customer Name");
+		}
 		response.sendRedirect("Menu.jsp");
 		
 	}
