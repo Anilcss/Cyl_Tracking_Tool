@@ -28,6 +28,12 @@
   	<description></description>
   	<servlet-class>controller.Delivery</servlet-class>
   </servlet>
+  <servlet>
+  	<servlet-name>Initalstock</servlet-name>
+  	<display-name>Initalstock</display-name>
+  	<description></description>
+  	<servlet-class>controller.Initalstock</servlet-class>
+  </servlet>
   <servlet-mapping>
   	<servlet-name>Cylindermaster</servlet-name>
   	<url-pattern>/Cylindermaster</url-pattern>
@@ -43,5 +49,9 @@
   <servlet-mapping>
   	<servlet-name>Delivery</servlet-name>
   	<url-pattern>/Delivery</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>Initalstock</servlet-name>
+  	<url-pattern>/Initalstock</url-pattern>
   </servlet-mapping>
 </web-app>

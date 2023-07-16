@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import Model.Dao;
+import Model.Neg_Dao;
 
 /**
  * Servlet implementation class Delivery
@@ -33,7 +34,7 @@ public class Delivery extends HttpServlet {
 		// TODO Auto-generated method stub
 
 		ArrayList<String> cyllist=new ArrayList<String>();
-		
+		boolean allownegstockforcustholding=false;
 		for(int i=1;i<=10;i++)
 		{
 			System.out.println("cylno"+i);
@@ -49,6 +50,11 @@ public class Delivery extends HttpServlet {
 		}
 		else {
 			response.getWriter().print("Error in input data Cylinder or Customer Name");
+			
+		}
+		if(allownegstockforcustholding && !Dao.Delete_cyldata(cyllist) )
+		{
+			Neg_Dao.insert_into_neg_customerholding(cyllist, cust_id);
 		}
 		response.sendRedirect("Menu.jsp");
 		

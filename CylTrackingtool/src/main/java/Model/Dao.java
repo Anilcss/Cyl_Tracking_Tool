@@ -67,7 +67,6 @@ public class Dao {
 
 				} catch (Exception e) {
 					System.out.println(e);
-					Neg_Dao.insert_into_neg_yard();
 				}
 			}
 			System.out.println("Total connection======>" + countconnection);

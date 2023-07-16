@@ -44,6 +44,7 @@
       <li><a href="yardreport.jsp">Yard Reports</a></li>
       <li><a href="customerHolding.jsp">Customer Holdings</a></li>
       <li><a href="masters.jsp">Masters</a></li>
+      <li><a href="initial_stock.jsp">Initial Stock(Only in Yard)</a></li>
     
     </ul>
   </div>

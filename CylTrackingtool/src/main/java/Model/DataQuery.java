@@ -43,15 +43,20 @@ public class DataQuery {
 		public static String fetchcyltypefromdatabase(String cylno) {
 			String type=null;
 			try {
+			
 				dbconnection2=new Dbconnection();
 				connection2=dbconnection2.getConnection();
 				String sql="select cyltype FROM cylmaster where cylno="+cylno;
 				preparedStatement2=connection2.prepareStatement(sql);
 				ResultSet resultSet=preparedStatement2.executeQuery();
+				System.out.println("==============================fetchcyltypefromdatabase"+cylno);
 				if(resultSet.next())
 				{
 					type=resultSet.getString("cyltype");
+					System.out.println("==================================================fetchcyltypefromdatabase(String cylno) successfull");
 				}
+				
+				
 			} catch (Exception e) {
 				// TODO: handle exception
 				System.out.println("=============="+LocalDateTime.now()+"================> Exception in ------(get cylinder type from database(cylinder master) by cylinder number )------DataQuery.fetchcyltypefromdatabase"+e);
@@ -60,6 +65,7 @@ public class DataQuery {
 				dbconnection2.closeconnection();
 			}
 			return type;
+		
 			
 			
 		}
